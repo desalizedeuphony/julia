@@ -1,0 +1,112 @@
+#Exercise 1    factorial
+function factorial2(n)
+  factorialvalue=1
+  for i=1:n
+    factorialvalue=factorialvalue*i
+  end
+  return factorialvalue
+end
+x=factorial2(20)
+
+
+#Exercise 2   binomial rv
+function binomial_rv(n,p)
+  x=0
+  for i=1:n
+    U=rand(1)
+    if U[1]<p
+    x=x+1
+    else
+      x=x
+    end
+  end
+  return x
+end
+x=binomial_rv(20,0.5)
+
+#Exercise 3   Monte Carlo Simulation of pi
+function pi_rv(n)
+  s=0
+  for i=1:n
+    U=rand(2)
+    x=U[1]
+    y=U[2]
+    if x^2+y^2<1
+      s=s+1
+    else 
+      s=s
+    end
+  end
+  area=4*s/n
+  return area
+end
+x=pi_rv(1000000)
+
+#Exercise 4   a self-defined distribution
+function money()
+  x=0
+  U=rand(10)
+  for i=1:8
+    if U[i]>0.5 && U[i+1]>0.5 && U[i+2]>0.5
+      x=1
+    else
+      x=0
+    end
+  end
+  return x
+end
+s=money()
+
+#Exercise 5  time series simulation
+using PyPlot
+function timeseries(n,alpha)
+x=Array(Float64,n+1)
+x[1]=0
+i=1
+while i<=n
+  x[i+1]=alpha*x[i]+randn()
+    i=i+1
+end
+  return x
+end
+timeseries1=timeseries(200,0.9)
+plot(timeseries1,"b-")
+
+#Exercise 6  plot legends
+using PyPlot
+
+x = randn(100)
+plot(x, "b-", label="white noise")
+legend()
+
+using PyPlot
+
+function timeseries(n,alpha)
+x=Array(Float64,n+1)
+x[1]=0
+i=1
+while i<=n
+  x[i+1]=alpha*x[i]+randn()
+    i=i+1
+end
+  return x
+end
+
+alphas=[0.0,0.8,0.98]
+for alpha in alphas
+  x=timeseries(201,alpha)
+  plot(x,label="alpha=$alpha")
+end
+legend()
+  
+                      
+  
+      
+
+
+  
+    
+    
+
+
+
